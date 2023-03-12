@@ -5,15 +5,15 @@
 Dot-Product Attention is an attention mechanism that relates different positions of a single sequence in order to compute a representation of the sequence. It is used in a variety of tasks such as reading comprehension, abstractive summarization, textual entailment, and learning task-independent sentence representations.
 
 ## Scaled Dot-Product Attention
-Scaled Dot-Product Attention is a particular attention function that maps a query and a set of key-value pairs to an output. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key. The input consists of queries and keys of dimension dk, and values of dimension dv. The output is computed as a matrix of outputs as: Attention(Q;K;V ) = softmax(QKTpdk)V. The dot product of the query and key, qk=Pdk
+Scaled Dot-Product Attention is a particular attention function that maps a query and a set of key-value pairs to an output. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key. The input consists of queries and keys of dimension dk, and values of dimension dv. The output is computed as a matrix of outputs as: Attention(Q;K;V ) = softmax(QKTpdk)V. The dot product of the query and key, q.k=Pdk
 i=1qiki, has mean 0 and variance dk. MultiHead( Q;K;V ) = Concat(head 1;:::;head h)WO, where head i= Attention( QWQ
 i;KWK
 i;VWV
 i). The projections are parameter matrices WQ
-i2Rdmodeldk,WK
-i2Rdmodeldk,WV
-i2Rdmodeldv
-andWO2Rhdvdmodel. The Transformer model uses dot-product attention in three different ways: encoder-decoder attention layers, self-attention layers in the encoder, and self-attention layers in the decoder.
+i2Rdmodel.dk,WK
+i2Rdmodel.dk,WV
+i2Rdmodel.dv
+andWO2Rhdv.dmodel. The Transformer model uses dot-product attention in three different ways: encoder-decoder attention layers, self-attention layers in the encoder, and self-attention layers in the decoder.
 
 ## Multi-Head Attention
 Multi-Head Attention consists of several attention layers running in parallel. Instead of performing a single attention function with dmodel-dimensional keys, values and queries, Multi-Head Attention linearly projects the queries, keys and values h times with different, learned linear projections to dk, dk and dv dimensions, respectively. On each of these projected versions of queries, keys and values, the attention function is performed in parallel, yielding dv-dimensional output values. These are concatenated and once again projected, resulting in the final values. In this work, h is set to 8 parallel attention layers, or heads, with dk=dv=dmodel=h= 64 .

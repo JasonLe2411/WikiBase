@@ -55,26 +55,32 @@ async function main(dir,meta) {
         topicList.push(getTopic(names))
     }
     //Read all files and make all keywords reference 
-    for (const names of files) {
-        let text = fs.readFileSync(dir +"/"+ names, 'utf-8');
+    for (let filesIndex=0;filesIndex < files.length;filesIndex++) {
+        let text = fs.readFileSync(dir +"/"+ files[filesIndex], 'utf-8');
         text = text.replace(/(\r\n|\n|\r)/gm, "\\n").split("\r").join("");
-        // for (let i=0;i < topicList.length;i++) {
-        //     text.replace(topicList[i],`[${topicList[i]}](/en/${files[i]})`)
-        // }
+        for (let i=0;i < topicList.length;i++) {
+            if (filesIndex == i) {
+                continue
+            }
+            text = text.replace(`${topicList[i]}`,`[${topicList[i]}](/en/${files[i]})`)
+        }
+
+        const dotIndex = files[filesIndex].lastIndexOf('.');
+        const path = files[filesIndex].substring(0, dotIndex)
 
         const wikiObject = {
-        "title" : names,
+        "title" : files[filesIndex],
         "description" : meta.description,
         "content" : text,
         "isPublished" : meta.isPublished,
         "isPrivate" : !meta.isPublished,
-        "locale" : "en",
-        "path" : `en/${names}`,
+        "locale" : meta.locale,
+        "path" : `${path}`,
         "tags" : "[]"
         }  
 
         await createWikiPage(wikiObject);
-        console.log(`Create wiki successfully for ${names} at ${wikiObject.path}`)
+        console.log(`Create wiki successfully for ${files[filesIndex]} at ${wikiObject.path}`)
 
     }
 
@@ -110,10 +116,11 @@ async function main(dir,meta) {
     // //const text = fs.readFileSync(, 'utf-8').replace(/\n/g, '\\n');
     // //console.log(text)
     const metaData = {
+    "locale" : "en",
     "title" : "Testing",
     "description" : "Meeting 3/11/2023",
     "isPublished" : true,
     "isPrivate" : false,
   }  
-  await main("./application/data/transformers",metaData);
+  await main("./application/data/podcast",metaData);
 })();
