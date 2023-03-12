@@ -1,2 +1,0 @@
-# WikiBase
-Philly Codefest Project
