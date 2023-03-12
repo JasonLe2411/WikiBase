@@ -87,7 +87,7 @@ class WikiGen:
                 result = f.result()
 
     def _generate_sections(self, raw_topic: str) -> Path:
-        topic = raw_topic.strip()
+        topic = raw_topic.strip().capitalize()
         page = f'# {topic}\n'
 
         section_query = f'Generate subtopics about the topic "{topic}" as a comma-separated list.'
