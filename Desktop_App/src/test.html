@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Logo and Buttons</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+		.logo {
+			margin-bottom: 20px;
+		}
+		.btn {
+			display: inline-block;
+			padding: 12px 24px;
+			border-radius: 50px;
+			font-size: 18px;
+			font-weight: bold;
+			text-decoration: none;
+			color: #fff;
+			background-color: #ff5733;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+			transition: all 0.3s ease-in-out;
+		}
+		.btn:hover {
+			transform: scale(1.05);
+			background-color: #ff714d;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+		.btn:not(:last-child) {
+			margin-right: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<img src="logo.png" alt="Logo" class="logo">
+		<a href="./wikiMenu.html" class="btn">Go to Wikis</a>
+		<!-- <a href="#" class="btn">Button 2</a> -->
+	</div>
+</body>
+</html>
